@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Stream</title>
+  <!-- Compiled and minified CSS -->
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/image-audio-questionaire/template-with-class/shell.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="main-data container col">
+    <div class="row">
+      <div class="card">
+        <div class="card-heading"><span>Srijans Knowledge Centre</span></div>
+        <div id="kc-container" class="card-content">
+
+          <!-- loader -->
+            <div class = "preloader-wrapper big active loader hide">
+              <div class = "spinner-layer spinner-blue-only">
+                <div class = "circle-clipper left">
+                  <div class = "circle"></div>
+                </div>
+                  
+                <div class = "gap-patch">
+                  <div class = "circle"></div>
+                </div>
+                  
+                <div class = "circle-clipper right">
+                  <div class = "circle"></div>
+                </div>
+              </div>
+            </div>
+            <!-- loader -->
+
+          <div class="listOfQuestions">
+          </div>
+          <h6><b>Lets capture</b></h6>
+          <p class="questionText">Place your question here for which you want to record your answer for.
+          </p>
+          <div id="formdata" class="btn-section">
+            
+            <button type="button" class="btn kc record" id="record_q1" disabled="disabled" onclick="AudioStream.startRecording(this.id)">Record</button>
+            <button type="button" class="btn kc pause" id="pause_q1" disabled="disabled" onclick="AudioStream.pauseRecording(this.id)">Pause</button>
+            <button type="button" class="btn kc resume hide" id="resume_q1" disabled="disabled" onclick="AudioStream.resumeRecording(this.id)">Resume</button>
+            <button type="button" class="btn kc stop" id="stop_q1" disabled="disabled" onclick="AudioStream.stopRecording(this.id)">Stop</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.32.min.js"></script>
+  <script src="main.js"></script>
+  <script>
+    var wRegion = "us-east-1";
+    var poolid = "us-east-1:XXXXXXXXX";
+    var s3bucketName = "BUCKET_NAME";
+    var audioPath = "/audio-files";
+    AudioStream = new AudioStream(wRegion,poolid,s3bucketName+audioPath);
+    AudioStream.audioStreamInitialize();
+    
+  </script>
+</body>
+</html>
